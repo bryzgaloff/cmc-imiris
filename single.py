@@ -26,9 +26,9 @@ def customer_behaviour(name, environment, boxes):
         print >> log_fd, cur_time(environment), 'Покупатель #', name, 'встал в очередь'
         start = environment.now
         yield box
+        total_latency += environment.now - start
         print >> log_fd, cur_time(environment), 'Покупатель #', name, 'обслуживается'
         yield environment.timeout(random.normalvariate(5, 0.2) * purchases_count)  # в секундах
-        total_latency += environment.now - start
     print >> log_fd, cur_time(environment), 'Покупатель #', name, 'обслужен'
 
 
